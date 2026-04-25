@@ -1,0 +1,15 @@
+reboot_camera:
+  name: Reboot Camera
+  description: Send a reboot command to one or all configured ONVIF cameras.
+  fields:
+    name:
+      name: Camera name
+      description: Name of the camera to reboot. Required unless 'all' is true.
+      example: "Garage"
+      selector:
+        text:
+    all:
+      name: All cameras
+      description: Reboot all configured cameras.
+      selector:
+        boolean:

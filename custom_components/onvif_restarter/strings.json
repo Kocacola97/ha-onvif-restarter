@@ -1,0 +1,23 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Add ONVIF Camera",
+        "data": {
+          "name": "Camera name",
+          "host": "IP address",
+          "port": "ONVIF port",
+          "username": "Username",
+          "password": "Password"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot connect to camera — check IP, port and credentials.",
+      "name_exists": "A camera with this name already exists."
+    },
+    "abort": {
+      "already_configured": "This camera (host:port) is already configured."
+    }
+  }
+}

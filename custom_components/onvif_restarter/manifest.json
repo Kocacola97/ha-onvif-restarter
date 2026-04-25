@@ -1,0 +1,10 @@
+{
+  "domain": "onvif_restarter",
+  "name": "ONVIF Camera Restarter",
+  "version": "1.0.0",
+  "documentation": "",
+  "requirements": ["onvif-zeep>=0.2.12"],
+  "config_flow": true,
+  "codeowners": [],
+  "iot_class": "local_polling"
+}
