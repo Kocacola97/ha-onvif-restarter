@@ -1,3 +1,5 @@
+import logging
+
 import voluptuous as vol
 from homeassistant import config_entries
 from homeassistant.const import CONF_HOST, CONF_NAME, CONF_PASSWORD, CONF_PORT, CONF_USERNAME
@@ -5,6 +7,8 @@ import homeassistant.helpers.config_validation as cv
 
 from .const import DEFAULT_PORT, DOMAIN
 from .onvif_client import test_connection
+
+_LOGGER = logging.getLogger(__name__)
 
 
 class OnvifRestarterConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
@@ -29,7 +33,13 @@ class OnvifRestarterConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                         user_input[CONF_USERNAME],
                         user_input[CONF_PASSWORD],
                     )
-                except Exception:
+                except Exception as err:
+                    _LOGGER.warning(
+                        "Config flow test_connection failed for %s:%s: %s",
+                        user_input[CONF_HOST],
+                        user_input[CONF_PORT],
+                        err,
+                    )
                     errors["base"] = "cannot_connect"
 
             if not errors:
