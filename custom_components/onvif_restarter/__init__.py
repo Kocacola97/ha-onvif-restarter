@@ -8,7 +8,7 @@ from homeassistant.const import CONF_HOST, CONF_NAME, CONF_PASSWORD, CONF_PORT, 
 from homeassistant.core import HomeAssistant, ServiceCall
 import homeassistant.helpers.config_validation as cv
 
-from .const import DOMAIN, SERVICE_REBOOT
+from .const import CONF_NOTIFY_ON_SUCCESS, DOMAIN, SERVICE_REBOOT
 from .onvif_client import reboot_camera
 
 _LOGGER = logging.getLogger(__name__)
@@ -109,6 +109,14 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
                         "camera": camera_name,
                         "status": "succeeded",
                     })
+                    notify = e.options.get(CONF_NOTIFY_ON_SUCCESS, e.data.get(CONF_NOTIFY_ON_SUCCESS, False))
+                    if notify:
+                        persistent_notification.async_create(
+                            hass,
+                            f"Camera '{camera_name}' rebooted successfully in {elapsed:.1f}s",
+                            title="ONVIF Restarter",
+                            notification_id=f"{DOMAIN}_reboot_success_{camera_name}",
+                        )
 
         hass.services.async_register(DOMAIN, SERVICE_REBOOT, _handle_reboot, schema=_SERVICE_SCHEMA)
 

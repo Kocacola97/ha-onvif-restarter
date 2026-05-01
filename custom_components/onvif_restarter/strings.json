@@ -8,7 +8,8 @@
           "host": "IP address",
           "port": "ONVIF port",
           "username": "Username",
-          "password": "Password"
+          "password": "Password",
+          "notify_on_success": "Notify on successful restart"
         }
       }
     },
@@ -18,6 +19,16 @@
     },
     "abort": {
       "already_configured": "This camera (host:port) is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Camera options",
+        "data": {
+          "notify_on_success": "Notify on successful restart"
+        }
+      }
     }
   }
 }
